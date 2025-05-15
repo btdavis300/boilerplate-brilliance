@@ -1,0 +1,15 @@
+{
+  "name": "boilerplate-brilliance",
+  "version": "1.0.0",
+  "description": "Simple CLI wizard to help setup boilerplate for new WP projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brennan Davis (GMB Dev)",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "inquirer": "^12.6.1"
+  }
+}
