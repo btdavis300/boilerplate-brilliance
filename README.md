@@ -1,1 +1,3 @@
-# Simple CLI wizard to install boilerplate for your WP projects
+# Boilerplate Brilliance
+
+## Simple CLI wizard to help setup boilerplate for new WP projects
