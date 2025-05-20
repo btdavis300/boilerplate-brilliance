@@ -5,4 +5,6 @@ function run(name) {
   console.log(message);
 }
 
+run();
+
 module.exports = { run };

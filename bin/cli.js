@@ -13,4 +13,4 @@ const argv = yargs(hideBin(process.argv))
   })
   .help().argv;
 
-run(argv.name);
+run();
