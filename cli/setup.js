@@ -6,7 +6,7 @@ import { execSync } from "child_process";
 function toSlug(text) {
   return text
     .toLowerCase()
-    .replace(/\s+/g, "-")
+    .replace(/\s+/g, "_")
     .replace(/[^\w\-]/g, "");
 }
 

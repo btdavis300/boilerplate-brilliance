@@ -6,10 +6,10 @@ export default async function showWelcomeMessage() {
   console.log(chalk.bold.blue("Boilerplate Brilliance"));
   console.log(chalk.cyan(`🌑 The abyss stares back, as the terminal hums...`));
   console.log(
-    chalk.gray(`🗝️ Ashen One, In the depths of deprecated libraries, you find **Boilerplate Brilliance**.
+    chalk.gray(`🗝️ In the depths of deprecated libraries, you find **Boilerplate Brilliance**.
   
     This tool, ancient and near-forgotten, still shapes the bones of WordPress.
-    Choose your path. Every flag you pass may yet doom—or redeem—you.`)
+    Kindle your fire. Shall you choose to keep the flame burning or not, you determine your fate...`)
   );
   console.log(chalk.green("Setting up your WordPress theme...\n"));
 
