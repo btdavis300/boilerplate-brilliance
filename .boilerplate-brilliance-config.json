@@ -1,5 +1,30 @@
 {
-  "author": "Brennan Davis",
-  "description": "This is a test theme",
-  "version": "1.0.0"
+  "themeSetup": {
+    "author": "Brennan Davis",
+    "description": "This is the theme's description",
+    "version": "1.0.0"
+  },
+  "sass": [
+    {
+      "parentDir": "archive"
+    },
+    {
+      "parentDir": "base"
+    },
+    {
+      "parentDir": "blocks"
+    },
+    {
+      "parentDir": "elements"
+    },
+    {
+      "parentDir": "global"
+    },
+    {
+      "parentDir": "page"
+    },
+    {
+      "parentDir": "single"
+    }
+  ]
 }
