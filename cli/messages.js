@@ -36,3 +36,12 @@ export async function showColorsMessage() {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   spinner.succeed("Ready!");
 }
+
+// Post Type Message
+export async function showPostTypeMessage() {
+  console.log(chalk.green("Setting up post type configuration...\n"));
+
+  const spinner = ora("Initializing setup...").start();
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  spinner.succeed("Ready!");
+}

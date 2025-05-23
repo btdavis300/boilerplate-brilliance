@@ -14,7 +14,7 @@ export async function runInitialSetup({
   gitInit,
 }) {
   // Validate inputs
-  const themeSlug = toSlug(themeName);
+  const themeSlug = toSlug(themeName, "_");
   const themeDir = makeThemeDir(themeSlug);
 
   if (fs.existsSync(themeDir)) {

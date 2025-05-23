@@ -1,10 +1,10 @@
 import path from "path";
 import fs from "fs";
 
-export function toSlug(text) {
+export function toSlug(text, character) {
   return text
     .toLowerCase()
-    .replace(/\s+/g, "_")
+    .replace(/\s+/g, character)
     .replace(/[^\w\-]/g, "");
 }
 

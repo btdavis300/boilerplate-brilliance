@@ -35,7 +35,7 @@ async function runCLI() {
   );
   await setups.runInitialSetup(initialAnswers);
 
-  let themeSlug = toSlug(initialAnswers.themeName);
+  let themeSlug = toSlug(initialAnswers.themeName, "_");
   themeDir = makeThemeDir(themeSlug);
 
   // check if setup. was successful with making the theme directory
@@ -60,7 +60,7 @@ async function runCLI() {
 
   // add Colors to Sass files
   if (stylingAnswers.useSass) {
-    await messages.showColorsMessage();
+    await messages.showColorsMessage(toSlug);
     const colorAnswers = await prompts.askColorQuestions();
     await setups.runColorSetup(
       colorAnswers,

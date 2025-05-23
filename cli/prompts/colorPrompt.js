@@ -1,6 +1,6 @@
 import inquirer from "inquirer";
 
-export async function askColorQuestions(sassScaffold) {
+export async function askColorQuestions(toSlug) {
   const colors = [];
   let addMore = true;
 
@@ -34,7 +34,7 @@ export async function askColorQuestions(sassScaffold) {
         },
       ]);
 
-      colors.push({ name: colorName, value: hexCode });
+      colors.push({ name: toSlug(colorName, "_"), color: hexCode });
 
       const { continueAdding } = await inquirer.prompt([
         {

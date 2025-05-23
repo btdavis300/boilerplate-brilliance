@@ -12,7 +12,7 @@ export async function runColorSetup(
   // Create color variables for scss file
   let colorVariables = "";
   colors.forEach((color) => {
-    colorVariables += `$${color.name}: ${color.value}; \n`;
+    colorVariables += `$${color.name}: ${color.color}; \n`;
   });
 
   // Make colors scss file and insert variables into file
@@ -34,7 +34,7 @@ export async function runColorSetup(
   colors.forEach((color) => {
     themeColors.palette.push({
       slug: color.name,
-      color: color.value,
+      color: color.color,
       name: color.name,
     });
   });
