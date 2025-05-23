@@ -60,8 +60,8 @@ async function runCLI() {
 
   // add Colors to Sass files
   if (stylingAnswers.useSass) {
-    await messages.showColorsMessage(toSlug);
-    const colorAnswers = await prompts.askColorQuestions();
+    await messages.showColorsMessage();
+    const colorAnswers = await prompts.askColorQuestions(toSlug);
     await setups.runColorSetup(
       colorAnswers,
       themeDir,
@@ -70,6 +70,17 @@ async function runCLI() {
       updateThemeJSON
     );
   }
+
+  // add post types
+  await messages.showColorsMessage();
+  const postTypeAnswers = await prompts.askPostTypeQuestions(toSlug);
+  //   await setups.runPostTypeSetup(
+  //     postTypeAnswers,
+  //     themeDir,
+  //     updateDefaults,
+  //     configPath,
+  //     updateThemeJSON
+  //   );
 }
 
 runCLI();
