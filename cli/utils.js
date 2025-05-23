@@ -80,3 +80,87 @@ export function updateThemeJSON(themePath, property, updates) {
     console.warn("⚠️ Couldn't read theme.json file.");
   }
 }
+
+export function pluralize(word) {
+  if (word.match(/[^aeiou]y$/i)) {
+    return word.replace(/y$/i, "ies");
+  } else if (word.match(/(s|x|z|ch|sh)$/i)) {
+    return word + "es";
+  } else if (word.match(/(f|fe)$/i)) {
+    return word.replace(/(f|fe)$/i, "ves");
+  } else {
+    return word + "s";
+  }
+}
+
+export function buildPostTypeFileContentFile(postType, themeSlug) {
+  const slug = postType;
+  const singluarName = postType
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+  const pluralName = pluralize(singluarName);
+  const functionName = `${themeSlug}_register_${slug}`;
+
+  const fileContent = `<?php
+
+if (! function_exists('${functionName}')) {
+    // Register Custom Post Type
+    function ${functionName}()
+    {
+        $labels = array(
+          'name' => _x('${singluarName}', 'post type general name', '${themeSlug}'),
+          'singular_name' => _x('${singluarName}', 'post type singular name', '${themeSlug}'),
+          'menu_name' => _x('${singluarName}', 'admin menu', '${themeSlug}'),
+          'name_admin_bar' => _x('${singluarName}', 'add new on admin bar', '${themeSlug}'),
+          'add_new' => _x('Add New', '${singluarName}', '${themeSlug}'),
+          'add_new_item' => __('Add New ${singluarName}', '${themeSlug}'),
+          'new_item' => __('New ${singluarName}', '${themeSlug}'),
+          'edit_item' => __('Edit ${singluarName}', '${themeSlug}'),
+          'view_item' => __('View ${singluarName}', '${themeSlug}'),
+          'all_items' => __('All ${pluralName}', '${themeSlug}'),
+          'search_items' => __('Search ${pluralName}', '${themeSlug}'),
+          'not_found' => __('No ${pluralName} found.', '${themeSlug}'),
+          'not_found_in_trash' => __('No ${pluralName} found in Trash.', '${themeSlug}'),
+          'archives' => __('${singluarName} Catalog', '${themeSlug}'),
+          'item_published' => __('${singluarName} Published', '${themeSlug}'),
+          'item_published_privately' => __('${singluarName} Published Privately', '${themeSlug}'),
+          'item_reverted_to_draft' => __('${singluarName} Reverted to Draft', '${themeSlug}'),
+          'item_scheduled' => __('${singluarName} Scheduled', '${themeSlug}'),
+          'item_updated' => __('${singluarName} Updated', '${themeSlug}'),
+          'item_link' => __('${singluarName} Link', '${themeSlug}'),
+          'item_link_description' => __('A link to a ${singluarName}', '${themeSlug}')
+        );
+        $rewrite = array(
+          'slug'                  => '${slug}',
+          'with_front'            => true,
+          'pages'                 => true,
+          'feeds'                 => true,
+        );
+        $args = array(
+          'labels' => $labels,
+          'description' => __('A ${singluarName}', 'upup'),
+          'public' => true,
+          'publicly_queryable' => true, // needed for archive page
+          'show_ui' => true,
+          'show_in_menu' => true,
+          'menu_icon' => '',
+          'query_var' => false,
+          'capability_type' => 'post',
+          'has_archive' => true,
+          'hierarchical' => false,
+          'menu_position' => null,
+          'rewrite'       => $rewrite,
+          'show_in_nav_menus' => true,
+          'show_in_rest' => true, // required for Block Editor
+          'template' => array(), //Array of blocks to use as the default initial state for an editor session. Each item should be an array containing block name and optional attributes.
+          'template_lock' => false, //Can also be set to 'all' or 'insert'
+          'taxonomies' => array('post_tag'), //You only need to define default WP taxonomies you want to include the post type in. Others are registered along when custom taxonomies are declared (see functions.php)
+          'supports' => array('title', 'excerpt', 'editor', 'author', 'thumbnail')
+        );
+        register_post_type('${slug}', $args);
+    }
+    add_action('init', '${functionName}', 15);
+}`;
+
+  return fileContent;
+}

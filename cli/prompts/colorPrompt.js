@@ -18,7 +18,7 @@ export async function askColorQuestions(toSlug) {
   // skip process if user declines
   if (useColors.confirmUsage !== true) {
     console.log(chalk.yellow("⚠️ Skipping colors setup as per user choice."));
-    return;
+    return { colors, addColorsToConfig: false };
   }
 
   // add the colors

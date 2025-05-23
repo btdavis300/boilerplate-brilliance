@@ -74,13 +74,13 @@ async function runCLI() {
   // add post types
   await messages.showPostTypeMessage();
   const postTypeAnswers = await prompts.askPostTypeQuestions(toSlug);
-  //   await setups.runPostTypeSetup(
-  //     postTypeAnswers,
-  //     themeDir,
-  //     updateDefaults,
-  //     configPath,
-  //     updateThemeJSON
-  //   );
+  await setups.runPostTypeSetup(
+    postTypeAnswers,
+    themeDir,
+    updateDefaults,
+    configPath,
+    themeSlug
+  );
 }
 
 runCLI();

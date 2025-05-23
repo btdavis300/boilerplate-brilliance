@@ -19,11 +19,6 @@
         "slug": "white",
         "color": "#fff",
         "name": "white"
-      },
-      {
-        "slug": "black_panther",
-        "color": "#000",
-        "name": "black_panther"
       }
     ]
   }
