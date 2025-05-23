@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 export async function askColorQuestions(toSlug) {
   const colors = [];
@@ -14,39 +15,43 @@ export async function askColorQuestions(toSlug) {
     },
   ]);
 
+  // skip process if user declines
+  if (useColors.confirmUsage !== true) {
+    console.log(chalk.yellow("⚠️ Skipping colors setup as per user choice."));
+    return;
+  }
+
   // add the colors
-  if (useColors.confirmUsage === true) {
-    while (addMore) {
-      const { colorName, hexCode } = await inquirer.prompt([
-        {
-          type: "input",
-          name: "colorName",
-          message: "Enter a color name:",
-          validate: (input) => (input ? true : "Please enter a color name."),
-        },
-        {
-          type: "input",
-          name: "hexCode",
-          message: "Enter the hex code for this color (e.g., #FF5733):",
-          validate: (input) =>
-            /^#([0-9A-Fa-f]{3,8})$/.test(input) ||
-            "Please enter a valid hex code (e.g., #A1B2C3).",
-        },
-      ]);
+  while (addMore) {
+    const { colorName, hexCode } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "colorName",
+        message: "Enter a color name:",
+        validate: (input) => (input ? true : "Please enter a color name."),
+      },
+      {
+        type: "input",
+        name: "hexCode",
+        message: "Enter the hex code for this color (e.g., #FF5733):",
+        validate: (input) =>
+          /^#([0-9A-Fa-f]{3,8})$/.test(input) ||
+          "Please enter a valid hex code (e.g., #A1B2C3).",
+      },
+    ]);
 
-      colors.push({ name: toSlug(colorName, "_"), color: hexCode });
+    colors.push({ name: toSlug(colorName, "_"), color: hexCode });
 
-      const { continueAdding } = await inquirer.prompt([
-        {
-          type: "confirm",
-          name: "continueAdding",
-          message: "Do you want to add another color?",
-          default: true,
-        },
-      ]);
+    const { continueAdding } = await inquirer.prompt([
+      {
+        type: "confirm",
+        name: "continueAdding",
+        message: "Do you want to add another color?",
+        default: true,
+      },
+    ]);
 
-      addMore = continueAdding;
-    }
+    addMore = continueAdding;
   }
 
   if (colors.length >= 1) {

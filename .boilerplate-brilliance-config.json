@@ -17,13 +17,13 @@
     "colors": [
       {
         "slug": "white",
-        "color": "#ffffff",
+        "color": "#fff",
         "name": "white"
       },
       {
-        "slug": "black",
+        "slug": "black_panther",
         "color": "#000",
-        "name": "black"
+        "name": "black_panther"
       }
     ]
   }

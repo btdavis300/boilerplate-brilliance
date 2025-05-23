@@ -72,7 +72,7 @@ async function runCLI() {
   }
 
   // add post types
-  await messages.showColorsMessage();
+  await messages.showPostTypeMessage();
   const postTypeAnswers = await prompts.askPostTypeQuestions(toSlug);
   //   await setups.runPostTypeSetup(
   //     postTypeAnswers,

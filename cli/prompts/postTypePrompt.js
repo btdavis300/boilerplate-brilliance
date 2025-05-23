@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 export async function askPostTypeQuestions(toSlug) {
   const postTypes = [];
@@ -14,33 +15,36 @@ export async function askPostTypeQuestions(toSlug) {
     },
   ]);
 
-  // add the colors
-  if (usePostTypes.confirmUsage === true) {
-    while (addMore) {
-      const postTypeName = await inquirer.prompt([
-        {
-          type: "input",
-          name: "postTypeName",
-          message:
-            "Enter a post type name (all spaces will be converted to '_'):",
-          validate: (input) =>
-            input ? true : "Please enter a post type name.",
-        },
-      ]);
+  // skip process if user declines
+  if (usePostTypes.confirmUsage !== true) {
+    console.log(chalk.yellow("⚠️ Skipping colors setup as per user choice."));
+    return;
+  }
 
-      postTypes.push(toSlug(postTypeName, "_"));
+  // add the post types
+  while (addMore) {
+    const { postTypeName } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "postTypeName",
+        message:
+          "Enter a post type name (all spaces will be converted to '_'):",
+        validate: (input) => (input ? true : "Please enter a post type name."),
+      },
+    ]);
 
-      const { continueAdding } = await inquirer.prompt([
-        {
-          type: "confirm",
-          name: "continueAdding",
-          message: "Do you want to add another post type?",
-          default: true,
-        },
-      ]);
+    postTypes.push(toSlug(postTypeName, "_"));
 
-      addMore = continueAdding;
-    }
+    const { continueAdding } = await inquirer.prompt([
+      {
+        type: "confirm",
+        name: "continueAdding",
+        message: "Do you want to add another post type?",
+        default: true,
+      },
+    ]);
+
+    addMore = continueAdding;
   }
 
   if (postTypes.length >= 1) {
