@@ -1,6 +1,6 @@
 import inquirer from "inquirer";
 
-export default async function askColorQuestions() {
+export async function askColorQuestions(sassScaffold) {
   const colors = [];
   let addMore = true;
 
@@ -49,20 +49,25 @@ export default async function askColorQuestions() {
     }
   }
 
-  // Display the colors
-  console.log("\nYou entered these colors:");
-  console.log(colors);
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  if (colors.length >= 1) {
+    //display the colors
+    console.log("\nYou entered these colors:");
+    console.log(colors);
 
-  // Ask to add to config file
-  const addColorsToConfig = await inquirer.prompt([
-    {
-      type: "confirm",
-      name: "addColorsToConfig",
-      message: "Do you want to update your config file with these colors?",
-      default: true,
-    },
-  ]);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  return { colors, addColorsToConfig };
+    // Ask to add to config file
+    const addColorsToConfig = await inquirer.prompt([
+      {
+        type: "confirm",
+        name: "addColorsToConfig",
+        message: "Do you want to update your config file with these colors?",
+        default: true,
+      },
+    ]);
+
+    return { colors, addColorsToConfig };
+  } else {
+    return { colors, addColorsToConfig: false };
+  }
 }

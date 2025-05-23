@@ -1,6 +1,6 @@
 import inquirer from "inquirer";
 
-export default async function askInitialQuestions(
+export async function askInitialQuestions(
   loadDefaults,
   saveDefaults,
   configPath

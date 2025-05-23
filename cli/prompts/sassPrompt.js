@@ -1,8 +1,6 @@
 import inquirer from "inquirer";
 
-export default async function askSassQuestions() {
-  //   const defaults = loadStylingDefaults();
-
+export async function askSassQuestions() {
   const answers = await inquirer.prompt([
     {
       type: "confirm",
@@ -15,6 +13,7 @@ export default async function askSassQuestions() {
       name: "scssChoice",
       message: "Implement default Scss scaffold?:",
       default: true,
+      when: (answers) => answers.useSass === true, // Only ask if "useSass" is true
     },
   ]);
 

@@ -4,13 +4,9 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import * as Messages from "./messages.js";
-import askInitialQuestions from "./prompts/initialPrompt.js";
-import askSassQuestions from "./prompts/sassPrompt.js";
-import askColorQuestions from "./prompts/colorPrompt.js";
-
-import runSetup from "./setup/setup.js";
-import runSassSetup from "./setup/sassSetup.js";
+import * as messages from "./messages.js";
+import * as prompts from "./prompts/prompts.js";
+import * as setups from "./setup/setup.js";
 
 import {
   toSlug,
@@ -18,6 +14,7 @@ import {
   loadDefaults,
   saveDefaults,
   updateDefaults,
+  updateThemeJSON,
 } from "./utils.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -30,18 +27,18 @@ const configPath = path.join(
 async function runCLI() {
   let themeDir = "";
 
-  await Messages.showWelcomeMessage();
-  const initialAnswers = await askInitialQuestions(
+  await messages.showWelcomeMessage();
+  const initialAnswers = await prompts.askInitialQuestions(
     loadDefaults,
     saveDefaults,
     configPath
   );
-  await runSetup(initialAnswers);
+  await setups.runInitialSetup(initialAnswers);
 
   let themeSlug = toSlug(initialAnswers.themeName);
   themeDir = makeThemeDir(themeSlug);
 
-  // check if runSetup was successful with making the theme directory
+  // check if setup. was successful with making the theme directory
   if (!fs.existsSync(themeDir)) {
     console.error(
       chalk.red(
@@ -52,14 +49,27 @@ async function runCLI() {
   }
 
   // CSS and Sass setup
-  await Messages.showCSSMessage();
-  const stylingAnswers = await askSassQuestions();
-  await runSassSetup(stylingAnswers, themeDir, updateDefaults, configPath);
+  await messages.showSassMessage();
+  const stylingAnswers = await prompts.askSassQuestions();
+  await setups.runSassSetup(
+    stylingAnswers,
+    themeDir,
+    updateDefaults,
+    configPath
+  );
 
   // add Colors to Sass files
-  await Messages.showColorsMessage();
-  const colorAnswers = await askColorQuestions();
-  console.log(colorAnswers);
+  if (stylingAnswers.useSass) {
+    await messages.showColorsMessage();
+    const colorAnswers = await prompts.askColorQuestions();
+    await setups.runColorSetup(
+      colorAnswers,
+      themeDir,
+      updateDefaults,
+      configPath,
+      updateThemeJSON
+    );
+  }
 }
 
 runCLI();

@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import chalk from "chalk";
 
-export default async function runSassSetup(
+export async function runSassSetup(
   { useSass, scssChoice },
   themeDir,
   updateDefaults,
@@ -37,41 +37,39 @@ export default async function runSassSetup(
 
   if (scssChoice) {
     const directories = [
-      { parentDir: "archive" },
-      { parentDir: "base" },
-      { parentDir: "blocks" },
-      { parentDir: "elements" },
-      { parentDir: "global" },
-      { parentDir: "page" },
-      { parentDir: "single" },
+      "archive",
+      "base",
+      "blocks",
+      "elements",
+      "global",
+      "page",
+      "single",
     ];
-
-    console.log("directories: ", directories);
 
     directories.forEach((dir) => {
       // make the directory
-      const dirPath = path.join(sassDir, dir.parentDir);
+      const dirPath = path.join(sassDir, dir);
       fs.mkdirSync(dirPath);
 
       // make the style.scss file inside the directory
       fs.writeFileSync(path.join(dirPath, "style.scss"), "");
       // log the creation of the file
-      console.log(chalk.blue(`✅ Created ${dir.parentDir}/style.scss`));
+      console.log(chalk.blue(`✅ Created ${dir}/style.scss`));
 
       // import the style.scss file in ponyfill.scss (already created)
-      const importStatement = `@import "${dir.parentDir}/style";\n`;
+      const importStatement = `@import "${dir}/style";\n`;
       const ponyfillScssPath = path.join(sassDir, "ponyfill.scss");
       const ponyfillScssContent = fs.readFileSync(ponyfillScssPath, "utf-8");
       fs.writeFileSync(ponyfillScssPath, ponyfillScssContent + importStatement);
       // log the import statement
       console.log(
         chalk.blue(
-          `✅ Imported style.scss of ${dir.parentDir} directory into ponyfill.scss`
+          `✅ Imported style.scss of ${dir} directory into ponyfill.scss`
         )
       );
     });
 
     // Update config file
-    updateDefaults(configPath, "sass", directories);
+    updateDefaults(configPath, "sass", "parentDir", directories);
   }
 }

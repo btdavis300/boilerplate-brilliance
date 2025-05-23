@@ -1,6 +1,7 @@
 import ora from "ora";
 import chalk from "chalk";
 
+// Welcome Message
 export async function showWelcomeMessage() {
   console.clear();
   console.log(chalk.bold.blue("Boilerplate Brilliance"));
@@ -18,16 +19,18 @@ export async function showWelcomeMessage() {
   spinner.succeed("Ready!");
 }
 
-export async function showCSSMessage() {
-  console.log(chalk.green("Setting up your CSS and Sass files...\n"));
+// Sass Message
+export async function showSassMessage() {
+  console.log(chalk.green("Setting up CSS and Sass configuration...\n"));
 
   const spinner = ora("Initializing CSS and Sass setup...").start();
   await new Promise((resolve) => setTimeout(resolve, 1000));
   spinner.succeed("Ready!");
 }
 
+// Colors Message
 export async function showColorsMessage() {
-  console.log(chalk.green("Adding Colors to Sass Files...\n"));
+  console.log(chalk.green("Setting up color configuration...\n"));
 
   const spinner = ora("Initializing setup...").start();
   await new Promise((resolve) => setTimeout(resolve, 1000));

@@ -1,6 +1,10 @@
 # Boilerplate Brilliance
 
-## Simple CLI wizard to scaffold Wordpress projects.
+Simple CLI wizard to scaffold Wordpress projects.
+
+## Overview
+
+This CLI program is intended for fast configuration of Wordpress block themes. This program is intended to be customizable as well as extended upon. For quickest results, use `boilerplate-brilliance-config.json` to setup up your full theme boilerplate.
 
 ## Installation
 
