@@ -81,6 +81,20 @@ async function runCLI() {
     configPath,
     themeSlug
   );
+
+  // add taxonomies
+  await messages.showTaxonomyMessage();
+  const taxonomyAnswers = await prompts.askTaxonomyQuestions(
+    toSlug,
+    postTypeAnswers.postTypes
+  );
+  await setups.runTaxonomySetup(
+    taxonomyAnswers,
+    themeDir,
+    updateDefaults,
+    configPath,
+    themeSlug
+  );
 }
 
 runCLI();

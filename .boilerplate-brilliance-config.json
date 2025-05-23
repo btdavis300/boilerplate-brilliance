@@ -3,23 +3,5 @@
     "author": "Author",
     "description": "This is your Wordpress theme",
     "version": "1.0.0"
-  },
-  "sass": {
-    "parentDir": [
-      "archive",
-      "base",
-      "blocks",
-      "elements",
-      "global",
-      "page",
-      "single"
-    ],
-    "colors": [
-      {
-        "slug": "white",
-        "color": "#fff",
-        "name": "white"
-      }
-    ]
   }
 }

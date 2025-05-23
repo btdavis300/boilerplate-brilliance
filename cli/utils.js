@@ -160,6 +160,63 @@ if (! function_exists('${functionName}')) {
         register_post_type('${slug}', $args);
     }
     add_action('init', '${functionName}', 15);
+  }`;
+
+  return fileContent;
+}
+
+export function buildTaxonomyFileContentFile(taxonomy, themeSlug) {
+  const { name, postTypes } = taxonomy;
+  const slug = name;
+  const singluarName = name
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+  const pluralName = pluralize(singluarName);
+  const functionName = `${themeSlug}_register_${slug}_taxonomy`;
+
+  const fileContent = `<?php
+if ( ! function_exists( '${functionName}' ) ) {
+
+// Register Custom Taxonomy
+function ${functionName}() {
+
+	$labels = array(
+		'name'                       => _x( '${pluralName}', 'Taxonomy General Name', '${themeSlug}' ),
+		'singular_name'              => _x( '${singluarName}', 'Taxonomy Singular Name', '${themeSlug}' ),
+		'menu_name'                  => __( '${singluarName}', '${themeSlug}' ),
+		'all_items'                  => __( 'All ${pluralName}', '${themeSlug}' ),
+		'parent_item'                => __( 'Parent ${singluarName}', '${themeSlug}' ),
+		'parent_item_colon'          => __( 'Parent ${singluarName}:', '${themeSlug}' ),
+		'new_item_name'              => __( 'New ${singluarName}', '${themeSlug}' ),
+		'add_new_item'               => __( 'Add New ${singluarName}', '${themeSlug}' ),
+		'edit_item'                  => __( 'Edit ${singluarName}', '${themeSlug}' ),
+		'update_item'                => __( 'Update ${singluarName}', '${themeSlug}' ),
+		'view_item'                  => __( 'View ${singluarName}', '${themeSlug}' ),
+		'add_or_remove_items'        => __( 'Add or remove ${pluralName}', '${themeSlug}' ),
+		'choose_from_most_used'      => __( 'Choose from the most used', '${themeSlug}' ),
+		'popular_items'              => __( 'Popular ${pluralName}', '${themeSlug}' ),
+		'search_items'               => __( 'Search ${pluralName}', '${themeSlug}' ),
+		'not_found'                  => __( 'Not Found', '${themeSlug}' ),
+		'no_terms'                   => __( 'No items', '${themeSlug}' ),
+		'items_list'                 => __( '${pluralName} list', '${themeSlug}' ),
+		'items_list_navigation'      => __( '${pluralName} list navigation', '${themeSlug}' ),
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => false,
+		'show_in_rest'               => true,
+	);
+	register_taxonomy( '${slug}', array( '${postTypes.join(", ")}' ), $args );
+
+}
+//run on hook after post types (posts are set to priority 15)
+add_action( 'init', '${functionName}', 16 );
+
 }`;
 
   return fileContent;

@@ -17,10 +17,12 @@ export async function runPostTypeSetup(
     console.log(chalk.yellow("✅ Created inc directory"));
   }
 
-  // create post type directory
+  // Check if post-type directory exists, if not, make it exist.
   const postTypeDir = path.join(themeDir, "inc/post-types");
-  fs.mkdirSync(postTypeDir);
-  console.log(chalk.yellow("✅ Created post-types directory"));
+  if (!fs.existsSync(postTypeDir)) {
+    fs.mkdirSync(postTypeDir);
+    console.log(chalk.yellow("✅ Created post-types directory"));
+  }
 
   // Add the new file into post-types directory as well as functions.php file
   // Read the functions.php file once before the loop

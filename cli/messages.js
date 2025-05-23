@@ -45,3 +45,12 @@ export async function showPostTypeMessage() {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   spinner.succeed("Ready!");
 }
+
+// Taxonomy Message
+export async function showTaxonomyMessage() {
+  console.log(chalk.green("Setting up taxonomy configuration...\n"));
+
+  const spinner = ora("Initializing setup...").start();
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  spinner.succeed("Ready!");
+}
