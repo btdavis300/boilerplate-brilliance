@@ -52,7 +52,7 @@ export async function runTaxonomySetup(
   );
 
   // Update config file
-  //   if (addColorsToConfig) {
-  //     updateDefaults(configPath, "sass", "colors", themeColors.palette);
-  //   }
+  if (addTaxonomiesToConfig) {
+    updateDefaults(configPath, "inc", "taxonomies", taxonomies);
+  }
 }

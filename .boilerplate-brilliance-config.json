@@ -3,5 +3,45 @@
     "author": "Author",
     "description": "This is your Wordpress theme",
     "version": "1.0.0"
+  },
+  "sass": {
+    "colors": [
+      {
+        "slug": "snow_white",
+        "color": "#ffffff",
+        "name": "snow_white"
+      },
+      {
+        "slug": "panther_black",
+        "color": "#000000",
+        "name": "panther_black"
+      }
+    ],
+    "parentDir": [
+      "archive",
+      "base",
+      "blocks",
+      "elements",
+      "global",
+      "page",
+      "single"
+    ]
+  },
+  "inc": {
+    "postTypes": ["program", "good_news", "directory"],
+    "taxonomies": [
+      {
+        "name": "faculty",
+        "postTypes": ["directory"]
+      },
+      {
+        "name": "department",
+        "postTypes": ["program"]
+      },
+      {
+        "name": "stories",
+        "postTypes": ["program", "good_news"]
+      }
+    ]
   }
 }

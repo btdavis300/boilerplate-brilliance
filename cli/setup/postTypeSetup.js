@@ -49,7 +49,7 @@ export async function runPostTypeSetup(
   );
 
   // Update config file
-  //   if (addColorsToConfig) {
-  //     updateDefaults(configPath, "sass", "colors", themeColors.palette);
-  //   }
+  if (addPostTypesToConfig) {
+    updateDefaults(configPath, "inc", "postTypes", postTypes);
+  }
 }

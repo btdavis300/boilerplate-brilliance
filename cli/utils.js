@@ -47,11 +47,24 @@ export function saveDefaults(defaults, configPath) {
   }
 }
 
-export function updateDefaults(configPath, property, subproperty, updates) {
+export function updateDefaults(
+  configPath,
+  property,
+  subproperty = false,
+  updates
+) {
   try {
     if (fs.existsSync(configPath)) {
       let json = JSON.parse(fs.readFileSync(configPath, "utf-8"));
-      json[property][subproperty] = updates; // update the JSON
+      if (subproperty) {
+        // if property does not exist, make it exist first.
+        if (!json[property]) {
+          json[property] = {};
+        }
+        json[property][subproperty] = updates; // update the JSON
+      } else {
+        json[property] = updates; // update the JSON
+      }
 
       // update config file
       fs.writeFile(configPath, JSON.stringify(json, null, 2), (err) => {
@@ -60,7 +73,7 @@ export function updateDefaults(configPath, property, subproperty, updates) {
       });
     }
   } catch (err) {
-    console.warn("⚠️ Couldn't read config file.");
+    console.warn("⚠️ Couldn't read config file: ", err);
   }
 }
 
