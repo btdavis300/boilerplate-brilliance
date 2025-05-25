@@ -17,7 +17,9 @@ export async function askTaxonomyQuestions(toSlug, postType) {
 
   // skip process if user declines
   if (useTaxonomies.confirmUsage !== true) {
-    console.log(chalk.yellow("⚠️ Skipping colors setup as per user choice."));
+    console.log(
+      chalk.yellow("⚠️ Skipping taxnonomy setup as per user choice.")
+    );
     return;
   }
 

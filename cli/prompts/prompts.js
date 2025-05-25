@@ -1,3 +1,4 @@
+export * from "./blockPrompt.js";
 export * from "./colorPrompt.js";
 export * from "./initialPrompt.js";
 export * from "./postTypePrompt.js";

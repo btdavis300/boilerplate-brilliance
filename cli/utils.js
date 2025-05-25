@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 
+// changes text to slug. Replaces spaces with character given. Removes all non-word characters.
 export function toSlug(text, character) {
   return text
     .toLowerCase()
@@ -8,10 +9,12 @@ export function toSlug(text, character) {
     .replace(/[^\w\-]/g, "");
 }
 
+// Reeturns directory path with theme will live.
 export function makeThemeDir(themeSlug) {
   return path.join(process.cwd(), themeSlug);
 }
 
+// loads config file. If file does not exist, make one.
 export function loadDefaults(configPath) {
   try {
     if (fs.existsSync(configPath)) {
@@ -39,6 +42,8 @@ export function loadDefaults(configPath) {
   return {};
 }
 
+// Initial save for config file.
+//TODO: refactor to remove this function, unecessary
 export function saveDefaults(defaults, configPath) {
   try {
     fs.writeFileSync(configPath, JSON.stringify(defaults, null, 2), "utf-8");
@@ -47,6 +52,7 @@ export function saveDefaults(defaults, configPath) {
   }
 }
 
+// Updates config path. Will create nested property if given.
 export function updateDefaults(
   configPath,
   property,
@@ -77,6 +83,7 @@ export function updateDefaults(
   }
 }
 
+// Updates theme.json file
 export function updateThemeJSON(themePath, property, updates) {
   try {
     if (fs.existsSync(themePath)) {
@@ -94,6 +101,7 @@ export function updateThemeJSON(themePath, property, updates) {
   }
 }
 
+// pluralize given word
 export function pluralize(word) {
   if (word.match(/[^aeiou]y$/i)) {
     return word.replace(/y$/i, "ies");
@@ -106,6 +114,7 @@ export function pluralize(word) {
   }
 }
 
+// builds necessary configuration boiler plate for post types.
 export function buildPostTypeFileContentFile(postType, themeSlug) {
   const slug = postType;
   const singluarName = postType
@@ -178,6 +187,7 @@ if (! function_exists('${functionName}')) {
   return fileContent;
 }
 
+// builds necessary boilerplate for taxonomy
 export function buildTaxonomyFileContentFile(taxonomy, themeSlug) {
   const { name, postTypes } = taxonomy;
   const slug = name;

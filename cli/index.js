@@ -74,13 +74,16 @@ async function runCLI() {
   // add post types
   await messages.showPostTypeMessage();
   const postTypeAnswers = await prompts.askPostTypeQuestions(toSlug);
-  await setups.runPostTypeSetup(
-    postTypeAnswers,
-    themeDir,
-    updateDefaults,
-    configPath,
-    themeSlug
-  );
+
+  if (postTypeAnswers) {
+    await setups.runPostTypeSetup(
+      postTypeAnswers,
+      themeDir,
+      updateDefaults,
+      configPath,
+      themeSlug
+    );
+  }
 
   // add taxonomies
   await messages.showTaxonomyMessage();
@@ -88,8 +91,21 @@ async function runCLI() {
     toSlug,
     postTypeAnswers.postTypes
   );
+  if (taxonomyAnswers) {
+    await setups.runTaxonomySetup(
+      taxonomyAnswers,
+      themeDir,
+      updateDefaults,
+      configPath,
+      themeSlug
+    );
+  }
+
+  // add blocks
+  await messages.showBlockMessage();
+  const blockAnswers = await prompts.askBlockQuestions(toSlug);
   await setups.runTaxonomySetup(
-    taxonomyAnswers,
+    blockAnswers,
     themeDir,
     updateDefaults,
     configPath,

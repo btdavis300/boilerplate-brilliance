@@ -17,7 +17,9 @@ export async function askPostTypeQuestions(toSlug) {
 
   // skip process if user declines
   if (usePostTypes.confirmUsage !== true) {
-    console.log(chalk.yellow("⚠️ Skipping colors setup as per user choice."));
+    console.log(
+      chalk.yellow("⚠️ Skipping post type setup as per user choice.")
+    );
     return;
   }
 

@@ -54,3 +54,12 @@ export async function showTaxonomyMessage() {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   spinner.succeed("Ready!");
 }
+
+// Block Message
+export async function showBlockMessage() {
+  console.log(chalk.green("Setting up block configuration...\n"));
+
+  const spinner = ora("Initializing setup...").start();
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  spinner.succeed("Ready!");
+}
