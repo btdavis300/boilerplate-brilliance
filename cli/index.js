@@ -15,6 +15,7 @@ import {
   saveDefaults,
   updateDefaults,
   updateThemeJSON,
+  addDefaultPostTypes,
 } from "./utils.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -86,11 +87,11 @@ async function runCLI() {
   }
 
   // add taxonomies
+  const postTypes = postTypeAnswers
+    ? utils.addDefaultPostTypes(postTypeAnswers.postTypes)
+    : utils.addDefaultPostTypes();
   await messages.showTaxonomyMessage();
-  const taxonomyAnswers = await prompts.askTaxonomyQuestions(
-    toSlug,
-    postTypeAnswers.postTypes
-  );
+  const taxonomyAnswers = await prompts.askTaxonomyQuestions(toSlug, postTypes);
   if (taxonomyAnswers) {
     await setups.runTaxonomySetup(
       taxonomyAnswers,

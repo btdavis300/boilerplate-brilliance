@@ -114,6 +114,19 @@ export function pluralize(word) {
   }
 }
 
+// adds default post types to array. If array does not exist, create one.
+export function addDefaultPostTypes(postTypes) {
+  let array = [];
+  if (postTypes) {
+    array = postTypes;
+  }
+
+  array.push("page");
+  array.push("post");
+
+  return array;
+}
+
 // builds necessary configuration boiler plate for post types.
 export function buildPostTypeFileContentFile(postType, themeSlug) {
   const slug = postType;
