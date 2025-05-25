@@ -88,8 +88,8 @@ async function runCLI() {
 
   // add taxonomies
   const postTypes = postTypeAnswers
-    ? utils.addDefaultPostTypes(postTypeAnswers.postTypes)
-    : utils.addDefaultPostTypes();
+    ? addDefaultPostTypes(postTypeAnswers.postTypes)
+    : addDefaultPostTypes();
   await messages.showTaxonomyMessage();
   const taxonomyAnswers = await prompts.askTaxonomyQuestions(toSlug, postTypes);
   if (taxonomyAnswers) {

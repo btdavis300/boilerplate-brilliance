@@ -28,19 +28,29 @@
     ]
   },
   "inc": {
-    "postTypes": ["program", "good_news", "directory"],
+    "postTypes": [
+      "program",
+      "good_news"
+    ],
     "taxonomies": [
       {
         "name": "faculty",
-        "postTypes": ["directory"]
+        "postTypes": [
+          "directory"
+        ]
       },
       {
         "name": "department",
-        "postTypes": ["program"]
+        "postTypes": [
+          "program"
+        ]
       },
       {
         "name": "stories",
-        "postTypes": ["program", "good_news"]
+        "postTypes": [
+          "program",
+          "good_news"
+        ]
       }
     ]
   }
