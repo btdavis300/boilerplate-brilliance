@@ -56,6 +56,12 @@
       "customFields": true,
       "jsx": true,
       "javaScript": true
+    },
+    {
+      "name": "Accordion",
+      "customFields": false,
+      "jsx": false,
+      "javaScript": false
     }
   ]
 }

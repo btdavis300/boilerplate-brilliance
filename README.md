@@ -17,5 +17,5 @@ npm install -g .
 Running this script will create theme directory and files in your working directory. Recommended to run in `/themes` of your Wordpress project.
 
 ```bash
-boilerplate-brilliance
+kindle-flame
 ```

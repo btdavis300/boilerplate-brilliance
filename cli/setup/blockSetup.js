@@ -51,7 +51,7 @@ export async function runBlockSetup(
     const blockDir = path.join(themeDir, `blocks/${slug}`);
     if (!fs.existsSync(blockDir)) {
       fs.mkdirSync(blockDir);
-      console.log(chalk.blue(`\n✅ Creating ${block.name} block...`));
+      console.log(chalk.blue(`\nCreating ${block.name} block...`));
       console.log(chalk.cyan(`✅ Created ${block.name}  directory`));
     }
 
@@ -126,8 +126,8 @@ add_action( 'init', '${themeSlug}_register_blocks' );`;
   // Write the updated content back to functions.php once
   fs.writeFileSync(functionsFile, functionsContent, "utf-8");
   console.log(
-    chalk.cyan(
-      "✅ Updated functions.php to include all block configurations successfully."
+    chalk.green(
+      "\n✅ Updated functions.php to include all block configurations successfully."
     )
   );
   console.log(chalk.green("✅ All blocks have been created successfully!"));
