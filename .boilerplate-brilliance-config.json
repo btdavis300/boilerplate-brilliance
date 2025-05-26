@@ -49,5 +49,13 @@
         ]
       }
     ]
-  }
+  },
+  "blocks": [
+    {
+      "name": "Content with CTAs",
+      "customFields": true,
+      "jsx": true,
+      "javaScript": true
+    }
+  ]
 }

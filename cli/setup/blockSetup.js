@@ -10,7 +10,8 @@ export async function runBlockSetup(
   updateDefaults,
   configPath,
   themeSlug,
-  toSlug
+  toSlug,
+  themeName
 ) {
   if (!blocks) {
     console.log(chalk.yellow("⚠️ Skipping block setup as per user choice."));
@@ -77,6 +78,25 @@ export async function runBlockSetup(
     }
   });
 
+  // if blocks exist, make block category
+  // TODO: put this above block iteration loop
+  if (blocks) {
+    const blockPatternRegistry = `\n\n/**
+    * Add ${themeName} Block Category
+    */
+    add_filter('block_categories_all', function ($categories) {
+        // Adding a new category.
+        $categories[] = array(
+            'slug'  => '${themeSlug}_blocks_category',
+            'title' => '${themeName} Blocks'
+        );
+
+        return $categories;
+    });`;
+
+    functionsContent += blockPatternRegistry;
+  }
+
   // close out the function for blockRegistrations
   blockRegistrations += `\n\n}
 add_action( 'init', '${themeSlug}_register_blocks' );`;
@@ -96,6 +116,6 @@ add_action( 'init', '${themeSlug}_register_blocks' );`;
 
   //   // Update config file
   if (addBlocksToConfig) {
-    updateDefaults(configPath, "blocks", false, taxonomies);
+    updateDefaults(configPath, "blocks", false, blocks);
   }
 }

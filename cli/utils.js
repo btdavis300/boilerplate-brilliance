@@ -115,7 +115,10 @@ export function pluralize(word) {
 }
 
 // adds default post types to array. If array does not exist, create one.
-export function addDefaultPostTypes(postTypes = []) {
+export function addDefaultPostTypes(postTypes) {
+  if (!postTypes) {
+    postTypes = [];
+  }
   postTypes.push("page");
   postTypes.push("post");
 
@@ -265,7 +268,7 @@ export function buildBlockJSONConfig(block, slug, themeSlug) {
   "description": "${block.name} Block",
   "style": "",
   "script": "",
-  "category": "${themeSlug}-blocks-category",
+  "category": "${themeSlug}_blocks_category",
   "icon": "",
   "apiVersion": 2,
   "keywords": [${arrayOfKeywords}],
