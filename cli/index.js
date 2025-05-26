@@ -54,7 +54,14 @@ async function runCLI() {
 
   console.log("set up answers: ", setupAnswers);
   if (setupAnswers === "Run Config File") {
-    await setups.runConfigSetup(configPath);
+    await setups.runConfigSetup(
+      configPath,
+      themeDir,
+      updateDefaults,
+      themeSlug,
+      initialAnswers.themeName,
+      toSlug
+    );
     return;
   }
 
