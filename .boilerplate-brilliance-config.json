@@ -63,5 +63,6 @@
       "jsx": false,
       "javaScript": false
     }
-  ]
+  ],
+  "webpack": true
 }

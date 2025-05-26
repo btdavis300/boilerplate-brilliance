@@ -310,3 +310,60 @@ if (! empty($block['className'])) {
 
   return blockContents;
 }
+
+// setup webpack config content
+export function buildWebPackConfig() {
+  const webpackConfig = `const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
+
+module.exports = {
+  mode: "development",
+  context: path.resolve(__dirname + "/src"),
+  entry: {
+    index: ["./index"],
+  },
+  output: {
+    path: __dirname + "/dist",
+    filename: "[name].bundle.min.js",
+    chunkFilename: "[id].bundle.js",
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
+  devServer: {
+    port: 3010,
+    watchContentBase: true,
+  },
+  watch: false,
+};
+`;
+
+  return webpackConfig;
+}
+
+// setup webpack config content for production
+export function buildWebPackConfigProd() {
+  const webpackConfig = `/** @format */
+
+const TerserPlugin = require("terser-webpack-plugin");
+const { merge } = require("webpack-merge");
+const base = require("./webpack.config.js");
+
+module.exports = merge(base, {
+  mode: "production",
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
+  devtool: false,
+  cache: false,
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
+  watch: false,
+});`;
+  return webpackConfig;
+}

@@ -55,6 +55,17 @@ export async function showTaxonomyMessage() {
   spinner.succeed("Ready!");
 }
 
+// JavaSript Message
+export async function showJavaScriptMessage() {
+  console.log(
+    chalk.green("Setting up JavaScript and Webpack configuration...\n")
+  );
+
+  const spinner = ora("Initializing JavaScript and Webpack setup...").start();
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  spinner.succeed("Ready!");
+}
+
 // Block Message
 export async function showBlockMessage() {
   console.log(chalk.green("Setting up block configuration...\n"));

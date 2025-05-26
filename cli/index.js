@@ -113,6 +113,20 @@ async function runCLI() {
     themeSlug
   );
 
+  // webpack
+  await messages.showJavaScriptMessage();
+  const useJavaScript = await prompts.askJavaScriptQuestion();
+  if (useJavaScript.confirmUsage) {
+    await setups.runJavaScriptSetup(
+      useJavaScript.addJavaScriptToConfig,
+      themeDir,
+      updateDefaults,
+      configPath
+    );
+  } else {
+    console.log("Skipping JavaScript setup.");
+  }
+
   // add blocks
   await messages.showBlockMessage();
   const blockAnswers = await prompts.askBlockQuestions();

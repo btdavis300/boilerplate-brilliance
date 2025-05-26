@@ -53,6 +53,7 @@ export async function runConfigSetup(
     await setups.runSassSetup({ useSass: false, scssChoice: false }, themeDir);
   }
 
+  // post type and taxonomy setup
   if ("inc" in config) {
     // post type setup
     if ("postTypes" in config.inc) {
@@ -79,8 +80,15 @@ export async function runConfigSetup(
     }
   }
 
+  // webpack setup
+  if ("webpack" in config) {
+    await setups.runJavaScriptSetup(false, themeDir);
+  } else {
+    console.log(chalk.yellow("Skipping JavaScript setup."));
+  }
+
+  // block setup
   if ("blocks" in config) {
-    // block setup
     const blocks = config.blocks;
     const useSass = "sass" in config;
     await setups.runBlockSetup(
