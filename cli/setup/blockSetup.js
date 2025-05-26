@@ -11,7 +11,8 @@ export async function runBlockSetup(
   configPath,
   themeSlug,
   toSlug,
-  themeName
+  themeName,
+  useSass
 ) {
   if (!blocks) {
     console.log(chalk.yellow("⚠️ Skipping block setup as per user choice."));
@@ -63,7 +64,6 @@ export async function runBlockSetup(
     const blockConfig = buildBlockConfig(block.name);
     fs.writeFileSync(path.join(blockDir, `${slug}.php`), blockConfig);
     console.log(chalk.cyan(`✅ Created ${slug}.php`));
-
     // Append this registration line to blockRegistrations (will be added to functions.php after this loop)
     blockRegistrations += `\n//${slug} block
     register_block_type( __DIR__ . '/blocks/${slug}/block.json' );\n`;
@@ -72,9 +72,27 @@ export async function runBlockSetup(
     if (block.customFields) {
       fs.writeFileSync(path.join(blockDir, `${slug}_field_group.php`), " ");
       console.log(chalk.cyan(`✅ Created ${slug}_field_group.php`));
-
       // add include_once to blockFieldGroups (will be added to functions.php after this loop)
       blockFieldGroups += `\ninclude_once( get_stylesheet_directory() . '/blocks/${slug}/${slug}_field_group.php' );`;
+    }
+
+    // Add sass file for block, if useSass is true
+    // If style.scss exists in sass/blocks, add sass file. Otherwise create the file.
+    // import style into ponyfill.scss
+    if (useSass) {
+      fs.writeFileSync(
+        path.join(path.join(themeDir, "sass/blocks"), `_${slug}.scss`),
+        `// ${block.name} Styling`
+      );
+      console.log(chalk.cyan(`✅ Created _${slug}.scss`));
+
+      const blockStyleFile = path.join(themeDir, "sass/blocks/style.scss");
+      let blockStyleContent = fs.existsSync(blockStyleFile)
+        ? fs.readFileSync(blockStyleFile, "utf-8")
+        : "";
+      blockStyleContent += `\n@import "${slug}";`;
+      fs.writeFileSync(blockStyleFile, blockStyleContent, "utf-8");
+      console.log(chalk.cyan(`✅ Updated sass files for ${block.name}.`));
     }
   });
 

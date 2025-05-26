@@ -27,7 +27,7 @@ export async function askColorQuestions(toSlug) {
       {
         type: "input",
         name: "colorName",
-        message: "Enter a color name:",
+        message: "Enter a color name (variable name):",
         validate: (input) => (input ? true : "Please enter a color name."),
       },
       {

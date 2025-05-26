@@ -7,14 +7,14 @@
   "sass": {
     "colors": [
       {
-        "slug": "snow_white",
-        "color": "#fff",
-        "name": "snow_white"
+        "slug": "white",
+        "color": "#ffffff",
+        "name": "white"
       },
       {
-        "slug": "panther_black",
-        "color": "#000000",
-        "name": "panther_black"
+        "slug": "black",
+        "color": "#000",
+        "name": "black"
       }
     ],
     "parentDir": [
@@ -30,7 +30,7 @@
   "inc": {
     "postTypes": [
       "program",
-      "department",
+      "directory",
       "good_news"
     ],
     "taxonomies": [
@@ -52,7 +52,7 @@
   },
   "blocks": [
     {
-      "name": "Content with CTAs",
+      "name": "Duotone Wave",
       "customFields": true,
       "jsx": true,
       "javaScript": true

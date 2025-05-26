@@ -107,7 +107,8 @@ async function runCLI() {
     configPath,
     themeSlug,
     toSlug,
-    initialAnswers.themeName
+    initialAnswers.themeName,
+    stylingAnswers.useSass
   );
 }
 
