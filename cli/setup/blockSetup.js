@@ -95,7 +95,7 @@ add_action( 'init', '${themeSlug}_register_blocks' );`;
   console.log(chalk.green("✅ All blocks have been created successfully!"));
 
   //   // Update config file
-  //   if (addTaxonomiesToConfig) {
-  //     updateDefaults(configPath, "inc", "taxonomies", taxonomies);
-  //   }
+  if (addBlocksToConfig) {
+    updateDefaults(configPath, "blocks", false, taxonomies);
+  }
 }

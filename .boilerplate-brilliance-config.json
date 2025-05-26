@@ -8,7 +8,7 @@
     "colors": [
       {
         "slug": "snow_white",
-        "color": "#ffffff",
+        "color": "#fff",
         "name": "snow_white"
       },
       {
@@ -30,26 +30,22 @@
   "inc": {
     "postTypes": [
       "program",
+      "department",
       "good_news"
     ],
     "taxonomies": [
       {
-        "name": "faculty",
-        "postTypes": [
-          "directory"
-        ]
-      },
-      {
-        "name": "department",
-        "postTypes": [
-          "program"
-        ]
-      },
-      {
-        "name": "stories",
+        "name": "interests",
         "postTypes": [
           "program",
-          "good_news"
+          "good_news",
+          "post"
+        ]
+      },
+      {
+        "name": "faculty",
+        "postTypes": [
+          "department"
         ]
       }
     ]

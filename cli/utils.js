@@ -119,7 +119,7 @@ export function addDefaultPostTypes(postTypes = []) {
   postTypes.push("page");
   postTypes.push("post");
 
-  return array;
+  return postTypes;
 }
 
 // builds necessary configuration boiler plate for post types.

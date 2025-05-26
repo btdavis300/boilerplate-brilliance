@@ -4,7 +4,7 @@
   "description": "Simple CLI wizard to help setup boilerplate for new WP projects",
   "main": "cli/index.js",
   "bin": {
-    "boilerplate-brilliance": "./cli/index.js"
+    "kindle-flame": "./cli/index.js"
   },
   "dependencies": {
     "chalk": "^5.3.0",
