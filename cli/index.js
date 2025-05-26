@@ -49,6 +49,15 @@ async function runCLI() {
     return;
   }
 
+  // Run Manual or Config setup
+  const setupAnswers = await prompts.askSetupQuestion(configPath);
+
+  console.log("set up answers: ", setupAnswers);
+  if (setupAnswers === "Run Config File") {
+    await setups.runConfigSetup(configPath);
+    return;
+  }
+
   // CSS and Sass setup
   await messages.showSassMessage();
   const stylingAnswers = await prompts.askSassQuestions();

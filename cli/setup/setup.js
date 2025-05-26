@@ -1,4 +1,5 @@
 export * from "./colorSetup.js";
+export * from "./configSetup.js";
 export * from "./blockSetup.js";
 export * from "./initialSetup.js";
 export * from "./postTypeSetup.js";
