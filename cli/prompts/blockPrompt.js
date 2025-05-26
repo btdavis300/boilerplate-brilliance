@@ -17,8 +17,7 @@ export async function askBlockQuestions() {
 
   // skip process if user declines
   if (useBlocks.confirmUsage !== true) {
-    console.log(chalk.yellow("⚠️ Skipping colors setup as per user choice."));
-    return;
+    return { blocks: false, addBlocksToConfig: false };
   }
 
   // add the post types
@@ -27,7 +26,7 @@ export async function askBlockQuestions() {
       {
         type: "input",
         name: "blockName",
-        message: "Enter a block name (all spaces will be converted to '_'):",
+        message: "Enter a block name:",
         validate: (input) => (input ? true : "Please enter a block name."),
       },
       {

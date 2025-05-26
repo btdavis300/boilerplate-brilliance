@@ -49,68 +49,69 @@ async function runCLI() {
     return;
   }
 
-  // CSS and Sass setup
-  await messages.showSassMessage();
-  const stylingAnswers = await prompts.askSassQuestions();
-  await setups.runSassSetup(
-    stylingAnswers,
-    themeDir,
-    updateDefaults,
-    configPath
-  );
+  //   // CSS and Sass setup
+  //   await messages.showSassMessage();
+  //   const stylingAnswers = await prompts.askSassQuestions();
+  //   await setups.runSassSetup(
+  //     stylingAnswers,
+  //     themeDir,
+  //     updateDefaults,
+  //     configPath
+  //   );
 
-  // add Colors to Sass files
-  if (stylingAnswers.useSass) {
-    await messages.showColorsMessage();
-    const colorAnswers = await prompts.askColorQuestions(toSlug);
-    await setups.runColorSetup(
-      colorAnswers,
-      themeDir,
-      updateDefaults,
-      configPath,
-      updateThemeJSON
-    );
-  }
+  //   // add Colors to Sass files
+  //   if (stylingAnswers.useSass) {
+  //     await messages.showColorsMessage();
+  //     const colorAnswers = await prompts.askColorQuestions(toSlug);
+  //     await setups.runColorSetup(
+  //       colorAnswers,
+  //       themeDir,
+  //       updateDefaults,
+  //       configPath,
+  //       updateThemeJSON
+  //     );
+  //   }
 
-  // add post types
-  await messages.showPostTypeMessage();
-  const postTypeAnswers = await prompts.askPostTypeQuestions(toSlug);
+  //   // add post types
+  //   await messages.showPostTypeMessage();
+  //   const postTypeAnswers = await prompts.askPostTypeQuestions(toSlug);
 
-  if (postTypeAnswers) {
-    await setups.runPostTypeSetup(
-      postTypeAnswers,
-      themeDir,
-      updateDefaults,
-      configPath,
-      themeSlug
-    );
-  }
+  //   if (postTypeAnswers) {
+  //     await setups.runPostTypeSetup(
+  //       postTypeAnswers,
+  //       themeDir,
+  //       updateDefaults,
+  //       configPath,
+  //       themeSlug
+  //     );
+  //   }
 
-  // add taxonomies
-  const postTypes = postTypeAnswers
-    ? addDefaultPostTypes(postTypeAnswers.postTypes)
-    : addDefaultPostTypes();
-  await messages.showTaxonomyMessage();
-  const taxonomyAnswers = await prompts.askTaxonomyQuestions(toSlug, postTypes);
-  if (taxonomyAnswers) {
-    await setups.runTaxonomySetup(
-      taxonomyAnswers,
-      themeDir,
-      updateDefaults,
-      configPath,
-      themeSlug
-    );
-  }
+  //   // add taxonomies
+  //   await messages.showTaxonomyMessage();
+  //   const taxonomyAnswers = await prompts.askTaxonomyQuestions(
+  //     toSlug,
+  //     addDefaultPostTypes(postTypeAnswers.postTypes)
+  //   );
+  //   if (taxonomyAnswers) {
+  //     await setups.runTaxonomySetup(
+  //       taxonomyAnswers,
+  //       themeDir,
+  //       updateDefaults,
+  //       configPath,
+  //       themeSlug
+  //     );
+  //   }
 
   // add blocks
   await messages.showBlockMessage();
-  const blockAnswers = await prompts.askBlockQuestions(toSlug);
-  await setups.runTaxonomySetup(
+  const blockAnswers = await prompts.askBlockQuestions();
+  await setups.runBlockSetup(
     blockAnswers,
     themeDir,
     updateDefaults,
     configPath,
-    themeSlug
+    themeSlug,
+    toSlug
   );
 }
 

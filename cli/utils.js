@@ -115,14 +115,9 @@ export function pluralize(word) {
 }
 
 // adds default post types to array. If array does not exist, create one.
-export function addDefaultPostTypes(postTypes) {
-  let array = [];
-  if (postTypes) {
-    array = postTypes;
-  }
-
-  array.push("page");
-  array.push("post");
+export function addDefaultPostTypes(postTypes = []) {
+  postTypes.push("page");
+  postTypes.push("post");
 
   return array;
 }
@@ -256,4 +251,59 @@ add_action( 'init', '${functionName}', 16 );
 }`;
 
   return fileContent;
+}
+
+// build block.json file for block
+export function buildBlockJSONConfig(block, slug, themeSlug) {
+  let arrayOfKeywords = [];
+  let keyWords = block.name.toLowerCase();
+  keyWords = keyWords.split(" ");
+  keyWords = keyWords.forEach((word) => arrayOfKeywords.push(`"${word}"`));
+  const fileContents = `{
+  "name": "${themeSlug}/${slug}",
+  "title": "${block.name} Block",
+  "description": "${block.name} Block",
+  "style": "",
+  "script": "",
+  "category": "${themeSlug}-blocks-category",
+  "icon": "",
+  "apiVersion": 2,
+  "keywords": [${arrayOfKeywords}],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "${slug}.php"
+  },
+  "styles": [],
+  "supports": {
+    "anchor": true,
+    "jsx": ${block.jsx},
+    "customClassName": true,
+    "className": true
+  },
+  "attributes": {}
+}`;
+
+  return fileContents;
+}
+
+export function buildBlockConfig(blockName) {
+  const blockClass = toSlug(blockName, "-");
+  const blockContents = `<?php 
+$anchor = '';
+if( !empty( $block['anchor'] ) ){
+	$anchor = ' id="' . sanitize_title( $block['anchor'] ) . '"';
+}
+
+$class_name = 'block';
+if (! empty($block['className'])) {
+    $class_name .= ' ' . sanitize_title( $block['className'] );
+}
+?>
+
+<section <?= $anchor ?> class="${blockClass} <?= $class_name ?>">
+<h1>${blockName} Block</h1>
+</section>
+  `;
+
+  return blockContents;
 }

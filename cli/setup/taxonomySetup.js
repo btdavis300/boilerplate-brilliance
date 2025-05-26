@@ -10,6 +10,11 @@ export async function runTaxonomySetup(
   configPath,
   themeSlug
 ) {
+  if (!taxonomies) {
+    console.log(chalk.yellow("⚠️ Skipping block setup as per user choice."));
+    return;
+  }
+
   // Check if inc directory exists, if not, make it exist.
   const incDir = path.join(themeDir, "inc");
   if (!fs.existsSync(incDir)) {

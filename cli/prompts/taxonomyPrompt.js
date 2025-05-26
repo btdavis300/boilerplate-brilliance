@@ -17,10 +17,7 @@ export async function askTaxonomyQuestions(toSlug, postType) {
 
   // skip process if user declines
   if (useTaxonomies.confirmUsage !== true) {
-    console.log(
-      chalk.yellow("⚠️ Skipping taxnonomy setup as per user choice.")
-    );
-    return;
+    return { taxonomies: false, addTaxonomiesToConfig: false };
   }
 
   // add the post types

@@ -10,6 +10,13 @@ export async function runPostTypeSetup(
   configPath,
   themeSlug
 ) {
+  if (!postTypes) {
+    console.log(
+      chalk.yellow("⚠️ Skipping post type setup as per user choice.")
+    );
+    return;
+  }
+
   // Check if inc directory exists, if not, make it exist.
   const incDir = path.join(themeDir, "inc");
   if (!fs.existsSync(incDir)) {
