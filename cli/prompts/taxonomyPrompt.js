@@ -1,5 +1,4 @@
 import inquirer from "inquirer";
-import chalk from "chalk";
 
 export async function askTaxonomyQuestions(toSlug, postType) {
   const taxonomies = [];
