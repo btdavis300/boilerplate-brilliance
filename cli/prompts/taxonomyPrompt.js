@@ -19,7 +19,7 @@ export async function askTaxonomyQuestions(toSlug, postType) {
     return { taxonomies: false, addTaxonomiesToConfig: false };
   }
 
-  // add the post types
+  // add the taxonomies
   while (addMore) {
     const { taxonomyName, postTypes } = await inquirer.prompt([
       {
@@ -32,7 +32,7 @@ export async function askTaxonomyQuestions(toSlug, postType) {
         type: "checkbox",
         name: "postTypes",
         message:
-          "Please choose a taxonomy to associate taxonomy (select all that apply):",
+          "Pleas choose a taxonomy to associated post type (select all that apply):",
         choices: postType,
         validate: function (answer) {
           if (answer.length < 1) {

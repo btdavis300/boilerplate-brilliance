@@ -10,6 +10,7 @@ export async function runTaxonomySetup(
   configPath,
   themeSlug
 ) {
+  // check to continue with function
   if (!taxonomies) {
     console.log(chalk.yellow("⚠️ Skipping block setup as per user choice."));
     return;

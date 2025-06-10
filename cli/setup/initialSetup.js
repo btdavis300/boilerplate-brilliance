@@ -54,6 +54,16 @@ export async function runInitialSetup({
   fs.writeFileSync(path.join(themeDir, "functions.php"), functionsContent);
   console.log(chalk.blue("✅ Created functions.php"));
 
+  // create template directory and index.html
+  const templateDir = path.join(themeDir, "templates");
+  if (!fs.existsSync(templateDir)) {
+    fs.mkdirSync(templateDir);
+    console.log(chalk.green("📁 Created templates directory"));
+  }
+  const indexHtmlContent = `<h1>Here is your theme!</h1>`;
+  fs.writeFileSync(path.join(templateDir, "index.html"), indexHtmlContent);
+  console.log(chalk.blue("✅ Created index.html in templates directory"));
+
   // create theme.json file
   const themeJSONContent = {
     $schema: "https://schemas.wp.org/trunk/theme.json",
